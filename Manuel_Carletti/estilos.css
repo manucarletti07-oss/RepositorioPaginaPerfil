@@ -1,0 +1,401 @@
+/* ===================================================
+   ESTILOS Tarjeta 3D Flip Premium - Manuel Carletti
+   =================================================== */
+
+:root {
+    --bg-light: #f8fafc;
+    --card-bg: rgba(15, 23, 42, 0.95);
+    --neon-blue: #38bdf8;
+    --neon-green: #34d399;
+    --text-main: #f1f5f9;
+    --text-muted: #94a3b8;
+}
+
+body {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    /* Fondo claro elegante con sutil patrón de puntos de ingeniería */
+    background-color: var(--bg-light);
+    background-image: radial-gradient(#cbd5e1 1px, transparent 1px);
+    background-size: 24px 24px;
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* CONTENEDOR CON PERSPECTIVA 3D */
+.escenario-3d {
+    width: 100%;
+    max-width: 410px;
+    min-height: 520px;
+    perspective: 1200px;
+}
+
+/* TARJETA QUE GIRA EN 3D */
+.tarjeta-3d {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.tarjeta-3d.girada {
+    transform: rotateY(180deg);
+}
+
+/* CARAS COMUNES DE LA TARJETA */
+.cara {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    box-sizing: border-box;
+    background: var(--card-bg);
+    backdrop-filter: blur(16px);
+    border-radius: 24px;
+    padding: 30px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 25px 50px -12px rgba(15, 23, 42, 0.25);
+    backface-visibility: hidden;
+    overflow: hidden;
+}
+
+/* ===================================================
+   CARA FRONTAL (Presentación Previa)
+   =================================================== */
+.cara-frontal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    min-height: 520px;
+}
+
+.glow-bg {
+    position: absolute;
+    width: 220px;
+    height: 220px;
+    background: radial-gradient(circle, rgba(56, 189, 248, 0.18) 0%, transparent 70%);
+    top: 15%;
+    pointer-events: none;
+}
+
+.badge-presentacion {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(52, 211, 153, 0.12);
+    border: 1px solid rgba(52, 211, 153, 0.3);
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--neon-green);
+    margin-bottom: 20px;
+}
+
+.punto-pulso {
+    width: 8px;
+    height: 8px;
+    background-color: var(--neon-green);
+    border-radius: 50%;
+    animation: pulso 1.8s infinite;
+}
+
+@keyframes pulso {
+    0% { box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.7); }
+    70% { box-shadow: 0 0 0 10px rgba(52, 211, 153, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(52, 211, 153, 0); }
+}
+
+/* AVATAR CON TU FOTO DE PERFIL PNG */
+.avatar-tech {
+    position: relative;
+    width: 110px;
+    height: 110px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 16px;
+}
+
+.avatar-ring {
+    position: absolute;
+    inset: -5px;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    background: linear-gradient(135deg, var(--neon-blue), var(--neon-green)) border-box;
+    mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: destination-out;
+    mask-composite: exclude;
+    animation: girarRing 8s linear infinite;
+}
+
+.avatar-img {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: top;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+    background-color: #1e293b;
+}
+
+@keyframes girarRing {
+    100% { transform: rotate(360deg); }
+}
+
+.cara-frontal h2 {
+    font-size: 26px;
+    margin: 0 0 4px 0;
+    background: linear-gradient(135deg, #ffffff 40%, var(--neon-blue) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.puesto-frontal {
+    color: var(--neon-green);
+    font-family: monospace;
+    font-size: 13px;
+    font-weight: 600;
+    margin: 0 0 18px 0;
+}
+
+/* TARJETAS DE MÉTRICAS */
+.grid-metricas {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.item-metrica {
+    flex: 1;
+    background: rgba(30, 41, 59, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.num-metrica {
+    color: var(--neon-blue);
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.label-metrica {
+    color: var(--text-muted);
+    font-size: 11px;
+    margin-top: 2px;
+}
+
+.subtitulo-presentacion {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.5;
+    margin-bottom: 22px;
+}
+
+.boton-girar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: linear-gradient(135deg, #2563eb, #1d4ed8);
+    color: #ffffff;
+    border: none;
+    padding: 13px 22px;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4);
+    transition: all 0.3s ease;
+}
+
+.boton-girar:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(37, 99, 235, 0.6);
+    background: linear-gradient(135deg, #1d4ed8, #1e40af);
+}
+
+.icono-girar {
+    display: inline-block;
+    transition: transform 0.4s ease;
+}
+
+.boton-girar:hover .icono-girar {
+    transform: rotate(180deg);
+}
+
+/* ===================================================
+   CARA TRASERA (Tarjeta de Desarrollador)
+   =================================================== */
+.cara-trasera {
+    transform: rotateY(180deg);
+}
+
+.ventana-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 14px;
+    margin-bottom: 18px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.circulos { display: flex; gap: 6px; }
+.circulos span { width: 10px; height: 10px; border-radius: 50%; }
+.rojo { background-color: #ef4444; }
+.amarillo { background-color: #f59e0b; }
+.verde { background-color: #10b981; }
+
+.archivo-nombre {
+    font-family: monospace;
+    font-size: 11px;
+    color: var(--text-muted);
+}
+
+.boton-volver {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: var(--text-muted);
+    padding: 3px 8px;
+    border-radius: 6px;
+    font-size: 11px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.boton-volver:hover {
+    color: #ffffff;
+    border-color: var(--neon-blue);
+    background: rgba(56, 189, 248, 0.1);
+}
+
+h1 {
+    font-size: 25px;
+    font-weight: 700;
+    line-height: 1.2;
+    margin: 0 0 6px 0;
+    background: linear-gradient(135deg, #ffffff 40%, var(--neon-blue) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: -0.5px;
+}
+
+.puesto {
+    color: var(--neon-green);
+    font-family: monospace;
+    font-size: 12.5px;
+    font-weight: 600;
+    margin: 0 0 16px 0;
+}
+
+.descripcion {
+    font-family: 'Trebuchet MS', 'Segoe UI', sans-serif;
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--text-main);
+    margin-bottom: 22px;
+}
+
+/* HABILIDADES CON ICONOS VECTORIALES */
+.datos {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 0;
+    margin: 0 0 24px 0;
+}
+
+.datos li {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(30, 41, 59, 0.7);
+    color: var(--neon-blue);
+    padding: 7px 12px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 600;
+    border: 1px solid rgba(56, 189, 248, 0.2);
+    transition: all 0.25s ease;
+}
+
+.datos li:hover {
+    background: #0284c7;
+    color: #ffffff;
+    border-color: var(--neon-blue);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 16px rgba(2, 132, 199, 0.4);
+}
+
+/* BOTONES DE ACCIÓN */
+.acciones {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.boton {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(135deg, #2563eb, #1d4ed8);
+    color: #ffffff;
+    padding: 12px 18px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-size: 13.5px;
+    font-weight: 600;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 14px rgba(37, 99, 235, 0.3);
+    transition: all 0.3s ease;
+}
+
+.contenido-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.flecha {
+    transition: transform 0.3s ease;
+}
+
+.boton:hover {
+    background: linear-gradient(135deg, #1d4ed8, #1e40af);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(37, 99, 235, 0.45);
+}
+
+.boton:hover .flecha {
+    transform: translateX(4px);
+}
+
+.boton-cv {
+    background: rgba(30, 41, 59, 0.8);
+    color: #f8fafc;
+    border: 1px solid rgba(56, 189, 248, 0.3);
+    box-shadow: none;
+}
+
+.boton-cv:hover {
+    background: #1e293b;
+    border-color: var(--neon-green);
+    color: var(--neon-green);
+    box-shadow: 0 6px 18px rgba(52, 211, 153, 0.25);
+}
+
+.boton-cv:hover .flecha {
+    transform: translateY(3px);
+}
